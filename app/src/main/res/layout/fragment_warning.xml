@@ -3,11 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.warning.warningFragment">
 
-    <TextView
+
+    <!-- Image en arrière-plan -->
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/warning_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- EditText for input -->
+
+    <!-- TextView for percentage -->
+
+    <EditText
+        android:id="@+id/input_warning"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="76dp"
+        android:background="@drawable/input_frame"
+        android:fontFamily="sans-serif"
+        android:hint="Percentage Alert !!!"
+        android:inputType="numberDecimal"
+        android:padding="8dp"
+        android:textColor="#000"
+        android:textColorHint="#757575"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/percentage_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:text="%"
+        android:textColor="#000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/input_warning"
+        app:layout_constraintTop_toTopOf="@id/input_warning"
+        />
+
+    <!-- Button for validation -->
+    <Button
+        android:id="@+id/button_validate_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/button_style_warning"
+        android:elevation="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="valider"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_warning" />
 
 </FrameLayout>
