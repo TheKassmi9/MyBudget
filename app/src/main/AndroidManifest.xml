@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -13,6 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JiBi"
         tools:targetApi="31">
+        <activity
+            android:name=".TraitementTransactions"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementUserdata"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementLogout"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementGoal"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementWarning"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementSpending"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementIncome"
+            android:exported="false" />
         <activity
             android:name=".NavigationdrawerActivity"
             android:exported="false"
@@ -27,7 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
