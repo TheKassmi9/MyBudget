@@ -6,15 +6,37 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_income"
+            android:icon="@drawable/ic_menu_income"
+            android:title="@string/menu_income" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_spending"
+            android:icon="@drawable/ic_menu_spending"
+            android:title="@string/menu_spending"/>
+        <!-- il faut traitement pour item de spending mtn je passe au goal-->
+        <item
+            android:id="@+id/nav_goal"
+            android:icon="@drawable/ic_menu_goal"
+            android:title="@string/menu_goal"/>
+        <item
+            android:id="@+id/nav_transactions"
+            android:icon="@drawable/ic_menu_transactions"
+            android:title="@string/menu_transactions"/>
+        <item
+            android:id="@+id/nav_warning"
+            android:icon="@drawable/ic_menu_warning"
+            android:title="@string/menu_warning"/>
+        <item
+            android:id="@+id/nav_userdata"
+            android:icon="@drawable/ic_menu_userdata"
+            android:title="@string/menu_userdata"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_logout"
+            android:title="@string/menu_logout"/>
+
     </group>
 </menu>

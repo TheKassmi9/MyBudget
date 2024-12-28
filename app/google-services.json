@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "660647544811",
+    "project_id": "budget-management-test",
+    "storage_bucket": "budget-management-test.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660647544811:android:ef2326e714830a2a22fbae",
+        "android_client_info": {
+          "package_name": "com.example.floussyy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhgryO3JYrb2ysexi-HaLWAFcqxANL5so"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

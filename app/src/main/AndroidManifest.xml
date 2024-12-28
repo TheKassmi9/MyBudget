@@ -13,6 +13,27 @@
         android:theme="@style/Theme.JiBi"
         tools:targetApi="31">
         <activity
+            android:name=".TraitementTransactions"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementUserdata"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementLogout"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementGoal"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementWarning"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementSpending"
+            android:exported="false" />
+        <activity
+            android:name=".TraitementIncome"
+            android:exported="false" />
+        <activity
             android:name=".NavigationdrawerActivity"
             android:exported="false"
             android:label="@string/title_activity_navigationdrawer"
