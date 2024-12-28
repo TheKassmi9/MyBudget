@@ -3,11 +3,15 @@ package com.example.jibi;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -17,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.jibi.databinding.ActivityNavigationdrawerBinding;
 
 public class NavigationdrawerActivity extends AppCompatActivity {
-
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavigationdrawerBinding binding;
 
@@ -25,42 +28,64 @@ public class NavigationdrawerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Utilisation de ViewBinding pour lier l'UI
         binding = ActivityNavigationdrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Configuration de la barre d'outils (Toolbar)
         setSupportActionBar(binding.appBarNavigationdrawer.toolbar);
-        binding.appBarNavigationdrawer.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        // Configuration du Floating Action Button (FAB)
+        binding.appBarNavigationdrawer.fab.setOnClickListener(view ->
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
-        });
+                        .setAnchorView(R.id.fab) // Ancre pour éviter la superposition
+                        .show()
+        );
+
+        // Initialisation du DrawerLayout et du NavigationView
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        // Définition des destinations principales (menu de navigation)
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setOpenableLayout(drawer)
-                .build();
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow // Ajoute d'autres IDs si nécessaire
+        ).setOpenableLayout(drawer).build();
+
+        // Configuration du NavController
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigationdrawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                int menuId=navDestination.getId();
+                if (menuId == R.id.nav_home) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Navigating to Home", Toast.LENGTH_SHORT).show();
+                } else if (menuId == R.id.nav_gallery) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Navigating to Gallery", Toast.LENGTH_SHORT).show();
+                } else if (menuId == R.id.nav_slideshow) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Navigating to Slideshow", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(NavigationdrawerActivity.this, "Unknown Destination", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Chargement du menu pour la Toolbar
         getMenuInflater().inflate(R.menu.navigationdrawer, menu);
         return true;
     }
 
     @Override
     public boolean onSupportNavigateUp() {
+        // Gestion de la navigation "Up" (retour) dans la barre d'outils
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigationdrawer);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 }
