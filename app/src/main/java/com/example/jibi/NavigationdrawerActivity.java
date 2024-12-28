@@ -59,16 +59,29 @@ public class NavigationdrawerActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                int menuId=navDestination.getId();
-                if (menuId == R.id.nav_home) {
-                    Toast.makeText(NavigationdrawerActivity.this, "Navigating to Home", Toast.LENGTH_SHORT).show();
-                } else if (menuId == R.id.nav_gallery) {
-                    Toast.makeText(NavigationdrawerActivity.this, "Navigating to Gallery", Toast.LENGTH_SHORT).show();
-                } else if (menuId == R.id.nav_slideshow) {
-                    Toast.makeText(NavigationdrawerActivity.this, "Navigating to Slideshow", Toast.LENGTH_SHORT).show();
+                int menuID=navDestination.getId();
+                if (menuID == R.id.nav_home) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Home", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_gallery) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Gallery", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_slideshow) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Slideshow", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_income) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Income", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_goal) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Goal", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_spending) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Spending", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_warning) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Warning", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_logout) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Logout", Toast.LENGTH_LONG).show();
+                } else if (menuID == R.id.nav_userdata) {
+                    Toast.makeText(NavigationdrawerActivity.this, "User DATA", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(NavigationdrawerActivity.this, "Unknown Destination", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NavigationdrawerActivity.this, "Unknown Destination", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 

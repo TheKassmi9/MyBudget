@@ -112,6 +112,19 @@
         android:inputType="date"
         android:paddingHorizontal="16dp"
         android:paddingVertical="12dp" />
+        <Button
+            android:text="Valider"
+            android:id="@+id/button_validate_userdata"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/button_style_login"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:elevation="4dp"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 
