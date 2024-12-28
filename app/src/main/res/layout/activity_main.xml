@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Fond avec opacité -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/login_background" /> <!-- Alpha pour l'arrière-plan -->
+
+        <!-- Champ pour le Username -->
+        <LinearLayout
+            android:id="@+id/password_username"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center_vertical"
+            android:elevation="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="337dp"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/login_icon"
+                android:contentDescription="Username Icon"
+                android:tint="#757575" />
+
+            <EditText
+                android:id="@+id/input_username"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:fontFamily="sans-serif"
+                android:hint="Username"
+                android:paddingStart="8dp"
+                android:background="@drawable/input_frame"
+                android:textColor="#000"
+                android:textColorHint="#757575"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Champ pour le Password -->
+        <LinearLayout
+            android:id="@+id/password_champs"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center_vertical"
+            android:elevation="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="400dp"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+
+            >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/password_icon"
+                android:contentDescription="Password Icon"
+                android:tint="#757575" />
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Password"
+                android:inputType="textPassword"
+
+                android:paddingStart="8dp"
+                android:background="@drawable/input_frame"
+                android:textColor="#000"
+                android:textColorHint="#757575"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <!-- Champ pour le Button send-->
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Envoyer"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_style_login"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:elevation="4dp"
+            android:layout_marginTop="470dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/sign_up"
+            android:layout_below="@id/password_champs"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="76dp">
+
+            <TextView
+                android:id="@+id/text_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Not a member?  "
+                android:textColor="#0B8E81"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="32dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:elevation="4dp" />
+
+            <TextView
+                android:id="@+id/text_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/signup_text"
+                android:textColor="#22BCAD"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:elevation="4dp" />
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

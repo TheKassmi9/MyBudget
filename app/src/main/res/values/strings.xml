@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">FlouSsYy</string>
+    <string name="title_activity_navigationdrawer">NavigationdrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Ouadghiri Marwane</string>
+    <string name="nav_header_subtitle">Mrouadghiri03@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_income">Income</string>
+    <string name="menu_spending">Spednings</string>
+    <string name="menu_goal">Goal</string>
+    <string name="menu_warning">Warning</string>
+    <string name="menu_userdata">User Informations</string>
+    <string name="menu_transactions">Transactions</string>
+    <string name="menu_logout">Logout</string>
+
+    <string name="signup_text"><u>Sign Up</u></string>
+
+
+</resources>
