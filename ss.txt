@@ -1,0 +1,3 @@
+    tools:context=".TraitementIncome"
+
+    tools:context=".TraitementWarning"

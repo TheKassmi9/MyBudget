@@ -39,7 +39,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/login_icon"
                 android:contentDescription="Username Icon"
-                android:tint="#757575" />
+                app:tint="#757575" />
 
             <EditText
                 android:id="@+id/input_username"
@@ -78,7 +78,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/password_icon"
                 android:contentDescription="Password Icon"
-                android:tint="#757575" />
+                app:tint="#757575" />
 
             <EditText
                 android:id="@+id/input_password"
