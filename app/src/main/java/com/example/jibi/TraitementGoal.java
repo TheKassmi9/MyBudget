@@ -15,7 +15,7 @@ public class TraitementGoal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traitement_goal);
-
+/*
         // Récupérer le TextView où afficher la valeur
         TextView resultTextView = findViewById(R.id.TextResult);
 
@@ -23,6 +23,6 @@ public class TraitementGoal extends AppCompatActivity {
         String goalValue = getIntent().getStringExtra("goal_value");
 
         // Afficher la valeur dans le TextView
-        resultTextView.setText("YOUR GOAL IS " + goalValue );
+        resultTextView.setText("YOUR GOAL IS " + goalValue );*/
     }
 }
