@@ -19,10 +19,12 @@ import android.widget.Toast;
 
 import com.example.jibi.MainActivity;
 import com.example.jibi.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutFragment extends Fragment {
 
     private LogoutViewModel mViewModel;
+    private FirebaseAuth firebaseAuth;
 
     public static LogoutFragment newInstance() {
         return new LogoutFragment();
@@ -35,15 +37,17 @@ public class LogoutFragment extends Fragment {
         // je sais pas pourkoi il ya erreur dans les buttons ici je vais les commanter pour  demain
         Button btn_valider=view.findViewById(R.id.button_valider_logout);
         Button btn_annuler=view.findViewById(R.id.button_annuler_logout);
-
+        firebaseAuth=FirebaseAuth.getInstance();
 
         btn_valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Démarrer la nouvelle activité avec l'Intent
+                firebaseAuth.signOut();
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 Toast.makeText(getContext(), "Logout succes,Login now", Toast.LENGTH_LONG).show();
                 startActivity(intent);
+
             }
         });
 

@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "912658448397",
-    "project_id": "jibi-6bbc3",
-    "storage_bucket": "jibi-6bbc3.firebasestorage.app"
+    "project_number": "34948556245",
+    "project_id": "jibi-b77d1",
+    "storage_bucket": "jibi-b77d1.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:912658448397:android:e1bcfd1127ccf68c861544",
+        "mobilesdk_app_id": "1:34948556245:android:2a096ea28b34303af6c95c",
         "android_client_info": {
           "package_name": "com.example.jibi"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "34948556245-jr02062f48cqfv8pvcve1gvh6dsqet2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyB7-vwU3VtwGI08UJO62g_5AeWVyGf5SaE"
+          "current_key": "AIzaSyAvlLVBS3hJDSZ9S9z2lW0cVLNzXNd61ZI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34948556245-jr02062f48cqfv8pvcve1gvh6dsqet2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
