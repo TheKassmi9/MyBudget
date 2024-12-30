@@ -39,7 +39,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/login_icon"
                 android:contentDescription="Username Icon"
-                android:tint="#757575" />
+                app:tint="#757575" />
 
             <EditText
                 android:id="@+id/input_username"
@@ -48,11 +48,12 @@
                 android:layout_weight="1"
 
                 android:fontFamily="sans-serif"
-                android:hint="Username"
+                android:hint="e.g. Marouane@email.com"
                 android:paddingStart="8dp"
                 android:background="@drawable/input_frame"
                 android:textColor="#000"
                 android:textColorHint="#757575"
+                android:inputType="textEmailAddress"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -78,7 +79,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/password_icon"
                 android:contentDescription="Password Icon"
-                android:tint="#757575" />
+                app:tint="#757575" />
 
             <EditText
                 android:id="@+id/input_password"

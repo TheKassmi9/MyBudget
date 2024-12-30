@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFF"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="100dp"
+        >
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvSignInTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:textColor="#000000" />
+<!--        Username Input-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:labelFor="@+id/etUsername"-->
+<!--            android:text="username"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            />-->
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. Marouane"
+            android:inputType="textPersonName"
+            android:drawablePadding="8dp"
+            android:padding="18dp"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_button_background"
+            android:layout_marginBottom="8dp" />
+        <!-- Email Input -->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:labelFor="@+id/etEmail"-->
+<!--            android:text="Email"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            />-->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. Marouane@email.com"
+            android:inputType="textEmailAddress"
+            android:drawableStart="@android:drawable/ic_dialog_email"
+            android:drawablePadding="8dp"
+            android:padding="18dp"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_button_background"
+            android:layout_marginBottom="8dp" />
+
+<!--        &lt;!&ndash; Password Input &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:labelFor="@+id/etPassword"-->
+<!--            android:text="Password"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            />-->
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:layout_gravity=""
+            android:inputType="textPassword"
+            android:drawableStart="@android:drawable/ic_lock_lock"
+            android:drawablePadding="8dp"
+            android:padding="18dp"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_button_background"
+            android:layout_marginBottom="8dp" />
+
+
+        <!-- Remember Me and Forgot Password -->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:layout_marginBottom="16dp">-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/cbRememberMe"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Remember me "-->
+<!--                android:textSize="14sp"-->
+<!--                android:layout_weight="1"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvForgotPassword"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Forgot password?"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="#5B6EF8"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                />-->
+<!--        </LinearLayout>-->
+
+        <!-- Sign In Button -->
+<!--        <Button-->
+<!--            android:id="@+id/btnSignUp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Sign In"-->
+<!--            android:textSize="16sp"-->
+<!--            android:backgroundTint="#4f46e5"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            />-->
+    <LinearLayout
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="@drawable/rounded_button_background"
+        android:backgroundTint="#79A46C"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+
+        >
+        <TextView
+            android:id="@+id/text_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+        <!-- Sign Up Link -->
+        <LinearLayout
+                  android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="16dp">
+                <TextView
+                    android:id="@+id/account_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an Account?"
+                    android:textSize="14sp"
+                    android:textColor="#769255"
+                    android:layout_marginBottom="24dp"
+
+                    android:focusable="true"
+                    android:layout_marginRight="20dp"/>
+            <TextView
+                android:id="@+id/toLogIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign in"
+                android:textSize="18sp"
+                android:textColor="#2C5423"
+                android:layout_marginBottom="24dp"
+                android:clickable="true"
+                android:focusable="true" />
+    </LinearLayout>
+                <!-- Google Sign In -->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btnGoogleSignIn"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="12dp"-->
+<!--            android:background="@drawable/rounded_button_background"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:elevation="4dp">-->
+
+<!--            &lt;!&ndash; Google Icon &ndash;&gt;-->
+<!--            <ImageView-->
+<!--                android:id="@+id/googleIcon"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/ic_google"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:contentDescription="google" />-->
+
+<!--            &lt;!&ndash; Spacing between icon and text &ndash;&gt;-->
+
+<!--            &lt;!&ndash; Google Text &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/googleText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Google"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="#000000"-->
+<!--                android:fontFamily="sans-serif-medium" />-->
+<!--        </LinearLayout>-->
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>
