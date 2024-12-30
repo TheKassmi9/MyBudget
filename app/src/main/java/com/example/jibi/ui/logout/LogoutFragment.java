@@ -51,8 +51,8 @@ public class LogoutFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Naviguer vers le fragment Home
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_navigation_drawer);
-                navController.navigate(R.id.nav_home); // ID du HomeFragment dans navigation.xml
+//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_navigation_drawer);
+//                navController.navigate(R.id.nav_home); // ID du HomeFragment dans navigation.xml
 
                 Toast.makeText(getContext(), "Retour à Home", Toast.LENGTH_LONG).show();
             }
