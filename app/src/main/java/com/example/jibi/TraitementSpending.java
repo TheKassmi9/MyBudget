@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
 public class TraitementSpending extends AppCompatActivity {
      TextView resultTextView;
     TextView statusTextView;
@@ -42,7 +43,9 @@ public class TraitementSpending extends AppCompatActivity {
          incomeValue = getIntent().getStringExtra("spent_value");
        // addField(db,userId,"goal","1000");
         // Add income to the user's income collection
-        addToCollection(db, userId, incomeValue, "Freelance Project", "2024-12-22","spend");
+                addToCollection(db, userId, Integer.parseInt(incomeValue), "Freelance Project", new Date(),"income");
+
+        addToCollection(db, userId, Integer.parseInt(incomeValue), "Freelance Project",new Date(),"spend");
         }catch(Exception e){
             statusTextView.setText("Operation Failed");  
         }
@@ -50,7 +53,7 @@ public class TraitementSpending extends AppCompatActivity {
         
     }
 
-      private void addToCollection(FirebaseFirestore db, String userId, String value, String name, String date,String collection_name) {
+      private void addToCollection(FirebaseFirestore db, String userId, int value, String name, Date date,String collection_name) {
         // Reference to the user's income collection
 
         CollectionReference incomeRef = db.collection("users").document(userId).collection(collection_name);
