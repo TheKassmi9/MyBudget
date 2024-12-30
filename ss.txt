@@ -1,0 +1,4 @@
+    tools:context=".TraitementIncome"
+
+    tools:context=".TraitementWarning"
+adb install app/build/outputs/apk/debug/app-debug.apk

@@ -15,6 +15,7 @@ public class TraitementUserdata extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traitement_userdata);
+        /*
         // Récupérer le TextView où afficher la valeur
         TextView resultTextView1 = findViewById(R.id.TextResult1);
         TextView resultTextView2 = findViewById(R.id.TextResult2);
@@ -31,7 +32,7 @@ public class TraitementUserdata extends AppCompatActivity {
         resultTextView1.setText("Mr7ba bik si(lala) " + usernameValue);
         resultTextView2.setText("mot de passe dyalk howa " + passwordValue+" ,kijatk securité");
         resultTextView3.setText("email  " + emailValue);
-        resultTextView4.setText("zayd f " + datebirthValue);
+        resultTextView4.setText("zayd f " + datebirthValue);*/
 
 
     }
