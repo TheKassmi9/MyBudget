@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "660647544811",
-    "project_id": "budget-management-test",
-    "storage_bucket": "budget-management-test.firebasestorage.app"
+    "project_number": "912658448397",
+    "project_id": "jibi-6bbc3",
+    "storage_bucket": "jibi-6bbc3.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:660647544811:android:ef2326e714830a2a22fbae",
+        "mobilesdk_app_id": "1:912658448397:android:e1bcfd1127ccf68c861544",
         "android_client_info": {
-          "package_name": "com.example.floussyy"
+          "package_name": "com.example.jibi"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDhgryO3JYrb2ysexi-HaLWAFcqxANL5so"
+          "current_key": "AIzaSyB7-vwU3VtwGI08UJO62g_5AeWVyGf5SaE"
         }
       ],
       "services": {

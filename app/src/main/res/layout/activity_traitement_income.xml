@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-   
+    tools:context=".TraitementIncome"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -35,10 +35,12 @@
 
     
       <TextView
+          android:id="@+id/income_status"
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="35sp"
-    android:text="Operation Completed"
+    android:text="Loading..."
     android:textColor="#45f542"
     android:textStyle="bold"
       app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +48,7 @@
     app:layout_constraintTop_toBottomOf="@id/wallet"
     android:layout_marginTop="35dp"
     
-    android:id="@+id/success"
+    
     android:fontFamily="sans-serif-black"
     />
      
@@ -57,12 +59,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="25sp"
-    android:text="200$ have added to your wallet"
+    android:text=""
     android:textColor="#42b0f5"
     android:layout_marginTop="40dp"
      app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/success"
+    app:layout_constraintTop_toBottomOf="@id/income_status"
     android:fontFamily="sans-serif-black"
     />
     

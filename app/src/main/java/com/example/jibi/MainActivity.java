@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_traitement_income);
-/*
+        setContentView(R.layout.activity_main);
+
         EditText editTextUsername = findViewById(R.id.input_username);
         EditText editTextPassword = findViewById(R.id.input_password);
         Button btnLogin = findViewById(R.id.button_send);
@@ -36,6 +36,6 @@ public class MainActivity extends AppCompatActivity {
             // Démarrer NavigationdrawerActivity
             Intent intent = new Intent(MainActivity.this, NavigationdrawerActivity.class);
             startActivity(intent);
-        });*/
+        });
     }
 }

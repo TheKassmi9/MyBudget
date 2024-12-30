@@ -78,7 +78,10 @@ public class NavigationdrawerActivity extends AppCompatActivity {
                     Toast.makeText(NavigationdrawerActivity.this, "Logout", Toast.LENGTH_LONG).show();
                 } else if (menuID == R.id.nav_userdata) {
                     Toast.makeText(NavigationdrawerActivity.this, "User DATA", Toast.LENGTH_LONG).show();
-                } else {
+                } 
+                 else if (menuID == R.id.nav_transactions) {
+                    Toast.makeText(NavigationdrawerActivity.this, "Transaction", Toast.LENGTH_LONG).show();
+                }else {
                     Toast.makeText(NavigationdrawerActivity.this, "Unknown Destination", Toast.LENGTH_LONG).show();
                 }
 
