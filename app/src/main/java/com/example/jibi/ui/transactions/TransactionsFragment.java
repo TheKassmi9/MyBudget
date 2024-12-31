@@ -48,6 +48,9 @@ public class TransactionsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
         // Initialize Firestore and fetch data
+
+        LinearLayout originalLayout = getView().findViewById(R.id.original_view);
+        originalLayout.setVisibility(View.GONE);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = "sas"; // Replace with the actual user ID
 
@@ -113,7 +116,7 @@ public class TransactionsFragment extends Fragment {
     private void addTransaction(String type, String value, String date, String collectionType) {
     String color = "#32a893"; // Default to green for income
 
-    if (collectionType=="spend") {
+    if (collectionType.equals("spend")) {
         color = "#FF0000"; // Red for spent
     }
 
@@ -139,17 +142,24 @@ public class TransactionsFragment extends Fragment {
 
             // Copy properties
             newTextView.setLayoutParams(originalTextView.getLayoutParams());
-            if (i == 0)
-                newTextView.setText("> A new " + type + " added at " + date);
+            if (i == 0){
+                
+                if(collectionType.equals("spend")) {
+                newTextView.setText(">spent: " + " added at " + date);
+                }else if(collectionType.equals("income")){
+                newTextView.setText(">income: " + " added at " + date);
+                  }
+                
+                }
             else if (i == 1)
                 {
                 Toast.makeText(getActivity(),collectionType, Toast.LENGTH_SHORT).show();
 
-                if (collectionType=="spend") {
+                if(collectionType.equals("spend")) {
                      newTextView.setText("-" + value + "$");
-                }else{
+                }else if(collectionType.equals("income")){
                 newTextView.setText("+" + value + "$");
-            }
+                  }
                 
                 
                 }
