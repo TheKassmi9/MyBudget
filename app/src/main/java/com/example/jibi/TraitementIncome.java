@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -40,6 +42,9 @@ public class TraitementIncome extends AppCompatActivity {
         statusTextView = findViewById(R.id.income_status);
         incomeValue= getIntent().getStringExtra("income_value");
         // Initialize Firestore
+        firebaseAuth=FirebaseAuth.getInstance();
+        currentUser=firebaseAuth.getCurrentUser();
+        currentUserId=currentUser.getUid();
         try{
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -49,7 +54,7 @@ public class TraitementIncome extends AppCompatActivity {
          
        // addField(db,userId,"goal","1000");
         // Add income to the user's income collection
-        addToCollection(db, currentUserId, Integer.parseInt(incomeValue), "Freelance Project", new Date(),"income");
+        addToCollection(db, currentUserId, Double.parseDouble(incomeValue), "Freelance Project", new Timestamp(new Date()),"income");
         }catch(Exception e){
             statusTextView.setText("Operation Failed");  
         }
@@ -57,7 +62,7 @@ public class TraitementIncome extends AppCompatActivity {
         
     }
 
-     private void addToCollection(FirebaseFirestore db, String userId, int value, String name, Date date,String collection_name) {
+     private void addToCollection(FirebaseFirestore db, String userId, double value, String name, Timestamp date, String collection_name) {
         // Reference to the user's income collection
 
         CollectionReference incomeRef = db.collection("Users").document(userId).collection(collection_name);
@@ -67,9 +72,10 @@ public class TraitementIncome extends AppCompatActivity {
         income.put("value", value);
         income.put("type", name);
         income.put("date", date);
+        Income ic=new Income(date,name,value);
 
         // Add the income object to Firestore
-        incomeRef.add(income)
+        incomeRef.add(ic)
             .addOnSuccessListener(documentReference -> {
                 // Success - Income added
             // Afficher la valeur dans le TextView

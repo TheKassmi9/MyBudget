@@ -67,14 +67,13 @@ public class TransactionsFragment extends Fragment {
         currentUser=firebaseAuth.getCurrentUser();
         currentUserId=currentUser.getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-<<<<<<< HEAD
 //        String userId = "sas"; // Replace with the actual user ID
         fetchcollection(db, currentUserId, "income");
         fetchcollection(db, currentUserId, "spend");
-=======
-        String userId = "sas"; // Replace with the actual user ID
 
-        fetchAndProcessTransactions(db, userId);
+//        String userId = "sas"; // Replace with the actual user ID
+
+        fetchAndProcessTransactions(db, currentUserId);
 
         /*
         fetchcollection(db, userId, "income");
