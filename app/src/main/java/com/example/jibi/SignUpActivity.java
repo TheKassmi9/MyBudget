@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
@@ -28,10 +30,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText etUsername;
@@ -43,14 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
-//    private GoogleSignInOptions mGoogleSignInClient;
-//
-////     Configure Google Sign-In
-//    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id)) // Replace with your Web Client ID
-//            .requestEmail()
-//            .build();
-//    mGoogleSignInClient=GoogleSignIn.getClient(this,gso);
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference=db.collection("Users");
+    private String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +101,10 @@ public class SignUpActivity extends AppCompatActivity {
                     String password=etPassword.getText().toString().trim();
                     String username=etUsername.getText().toString().trim();
                     createUserEmailAccount(email,password,username);
+
+                }
+                else {
+                    Toast.makeText(SignUpActivity.this, "Cannot Sign Up with empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -107,43 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Account is created successfully!", Snackbar.LENGTH_LONG)
-                                .setAction("OK", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        // Optional: Handle click on the action button
-                                    }
-                                });
-
-                        View snackbarView = snackbar.getView();
-                        snackbarView.setBackgroundColor(Color.GREEN); // Set the background color to green (success)
-
-// Customize the text color and appearance
-                        TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
-                        textView.setTextColor(Color.WHITE); // Set the text color to white
-                        textView.setTextSize(16); // Set font size
-                        textView.setTypeface(Typeface.DEFAULT_BOLD); // Make the text bold
-                        textView.setCompoundDrawablePadding(16); // Add padding between text and any icon
-
-// Set the Snackbar to the top of the screen
-                        ViewGroup.LayoutParams params = snackbarView.getLayoutParams();
-                        if (params instanceof FrameLayout.LayoutParams) {
-                            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) params;
-                            layoutParams.gravity = Gravity.TOP; // Position the Snackbar at the top
-                            snackbarView.setLayoutParams(layoutParams);
-                        }
-
-// Add padding to the Snackbar view
-                        snackbarView.setPadding(24, 16, 24, 16); // Left, Top, Right, Bottom padding
-
-// Optionally adjust Snackbar elevation for a modern look
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            snackbarView.setElevation(6f); // Add shadow effect
-                        }
-
-// Show the Snackbar
-                        snackbar.show();
-
+                        initializeUserDocument(username, email);
                         Intent i= new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(i);
                     }
@@ -194,7 +169,60 @@ public class SignUpActivity extends AppCompatActivity {
             });
         }
     }
-    private void registerWithGoogle(){
+    private void initializeUserDocument(String username, String email){
+        currentUserId= firebaseAuth.getCurrentUser().getUid();
+        DocumentReference userdoc= collectionReference.document(currentUserId);
+        //check if the document exists
+        userdoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(!documentSnapshot.exists()){
+                    //Create the basic format of a User
+                    Map<String, Object> initialData= new HashMap<>();
+                    initialData.put("userName",username);
+                    initialData.put("email",email);
+                    initialData.put("budget",new Integer(0));
+                    Income ic=new Income(new Timestamp(new Date()),"",0);
+                    Spend sp= new Spend(new Timestamp(new Date()), "",0);
+                    UserAccount initData=new UserAccount(0,email,username);
+
+                    userdoc.collection("income").add(ic)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(SignUpActivity.this, "Income collection initialized.", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignUpActivity.this, "Firestore Failed to initialize income collection", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    userdoc.collection("spend").add(sp).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(SignUpActivity.this, "spends collection initialized.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignUpActivity.this, "Firestore Failed to initialize income collection", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    userdoc.set(initData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(SignUpActivity.this, "User journal document initialized", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignUpActivity.this, "Error initializing user document", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
 
     }
 }

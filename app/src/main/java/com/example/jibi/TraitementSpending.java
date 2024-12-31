@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,10 +24,25 @@ public class TraitementSpending extends AppCompatActivity {
      TextView resultTextView;
     TextView statusTextView;
     String incomeValue;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+//    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+//    private CollectionReference collectionReference=db.collection("Users");
+    private String currentUserId;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
+        firebaseAuth=FirebaseAuth.getInstance();
+        currentUser=firebaseAuth.getCurrentUser();
+        currentUserId=currentUser.getUid();
         setContentView(R.layout.activity_traitement_spending);
        // Récupérer le TextView où afficher la valeur
         resultTextView = findViewById(R.id.income);
@@ -34,7 +52,7 @@ public class TraitementSpending extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Example user ID
-        String userId = "sas"; // Replace with the actual user ID
+//        String userId = "sas"; // Replace with the actual user ID
 
         
 
@@ -42,7 +60,7 @@ public class TraitementSpending extends AppCompatActivity {
          incomeValue = getIntent().getStringExtra("spent_value");
        // addField(db,userId,"goal","1000");
         // Add income to the user's income collection
-        addToCollection(db, userId, incomeValue, "Freelance Project", "2024-12-22","spend");
+        addToCollection(db, currentUserId, incomeValue, "Freelance Project", "2024-12-22","spend");
         }catch(Exception e){
             statusTextView.setText("Operation Failed");  
         }
@@ -53,7 +71,7 @@ public class TraitementSpending extends AppCompatActivity {
       private void addToCollection(FirebaseFirestore db, String userId, String value, String name, String date,String collection_name) {
         // Reference to the user's income collection
 
-        CollectionReference incomeRef = db.collection("users").document(userId).collection(collection_name);
+        CollectionReference incomeRef = db.collection("Users").document(userId).collection(collection_name);
 
         // Create an income object
         Map<String, Object> income = new HashMap<>();

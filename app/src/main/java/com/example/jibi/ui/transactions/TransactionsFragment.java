@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.jibi.R;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,10 +26,23 @@ import java.util.List;
 public class TransactionsFragment extends Fragment {
 
     private TransactionsViewModel mViewModel;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+//    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+//    private CollectionReference collectionReference=db.collection("Users");
+    private String currentUserId;
 
     public static TransactionsFragment newInstance() {
         return new TransactionsFragment();
+
     }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -40,16 +55,19 @@ public class TransactionsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
         // Initialize Firestore and fetch data
+        firebaseAuth=FirebaseAuth.getInstance();
+        currentUser=firebaseAuth.getCurrentUser();
+        currentUserId=currentUser.getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String userId = "sas"; // Replace with the actual user ID
-        fetchcollection(db, userId, "income");
-        fetchcollection(db, userId, "spend");
+//        String userId = "sas"; // Replace with the actual user ID
+        fetchcollection(db, currentUserId, "income");
+        fetchcollection(db, currentUserId, "spend");
 
     }
 
     private void fetchcollection(FirebaseFirestore db, String userId, String collection_name) {
         // Reference to the user's income collection
-        CollectionReference incomeRef = db.collection("users").document(userId).collection(collection_name);
+        CollectionReference incomeRef = db.collection("Users").document(userId).collection(collection_name);
 
         // Query the income collection
         incomeRef.get()

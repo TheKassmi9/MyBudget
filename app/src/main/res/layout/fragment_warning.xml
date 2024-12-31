@@ -1,73 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.warning.warningFragment">
+    android:fillViewport="true"
+    android:padding="16dp"
+    android:background="@color/background_color">
 
-
-    <!-- Image en arrière-plan -->
-    <ImageView
-        android:id="@+id/imageView2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/warning_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- EditText for input -->
-
-    <!-- TextView for percentage -->
-
-    <EditText
-        android:id="@+id/input_warning"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginLeft="76dp"
-        android:background="@drawable/input_frame"
-        android:fontFamily="sans-serif"
-        android:hint="Percentage Alert !!!"
-        android:inputType="numberDecimal"
-        android:padding="8dp"
-        android:textColor="#000"
-        android:textColorHint="#757575"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/percentage_text"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:text="%"
-        android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/input_warning"
-        app:layout_constraintTop_toTopOf="@id/input_warning"
-        />
+        android:orientation="vertical">
 
-    <!-- Button for validation -->
-    <Button
-        android:id="@+id/button_validate_warning"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/button_style_warning"
-        android:elevation="4dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="valider"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_warning" />
+        <!-- Profile Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="206dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/income_background"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <!-- Placeholders for content -->
+        </LinearLayout>
 
-</FrameLayout>
+        <!-- About Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:elevation="6dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WARNING"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_text"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center" />
+
+            <!-- Value Input Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Value:"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_text"
+                    android:layout_gravity="center" />
+
+                <EditText
+                    android:id="@+id/input_warning"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/input_frame"
+                    android:fontFamily="sans-serif"
+                    android:hint="Enter warning percentage"
+                    android:inputType="numberDecimal"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:textColorHint="#757575"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Validation Button -->
+            <Button
+                android:id="@+id/button_validate_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:elevation="4dp"
+                android:background="@drawable/button_style_warning"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="20dp"
+                android:text="Valider"
+                android:layout_gravity="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,138 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.spending.spendingFragment">
+    android:fillViewport="true"
+    android:padding="16dp"
+    android:background="@color/background_color">
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <!-- Image de fond -->
-        <ImageView
+        <!-- Profile Header -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/spending_background"
-            android:alpha="0.8" />
-        <EditText
-            android:id="@+id/input_spend"
-            android:layout_width="276dp"
-            android:layout_height="48dp"
-        android:hint="spending"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="360dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/input_frame"
-        android:textColor="#000"
-        android:textColorHint="#757575"
-        android:fontFamily="sans-serif"
-        android:textSize="16sp"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="12dp" />
+            android:layout_height="200dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/income_background"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <!-- Placeholders for content -->
+        </LinearLayout>
 
-        <!-- Groupement des RadioButton dans un RadioGroup -->
-        <RadioGroup
-            android:id="@+id/radiogrp"
+        <!-- About Section -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="423dp"
-            android:layout_gravity="center">
+            android:layout_marginTop="15dp"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:elevation="6dp"
+            android:layout_marginBottom="16dp">
 
-            <!-- Première ligne -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SPENDING"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_text"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center" />
+
+            <!-- Value Input Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="10dp">
 
-                <RadioButton
-                    android:id="@+id/radioButton1"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_marginEnd="8dp" /> <!-- Marge droite -->
+                    android:text="Value:"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_text"
+                    android:layout_gravity="center" />
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2"
-                    android:layout_marginEnd="55dp"
-                    android:layout_marginStart="45dp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3" />
+                <EditText
+                    android:id="@+id/input_spend"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/input_frame"
+                    android:fontFamily="sans-serif"
+                    android:hint="Enter spending value"
+                    android:inputType="numberDecimal"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:textColorHint="#757575"
+                    android:textSize="16sp" />
             </LinearLayout>
-
-            <!-- Deuxième ligne -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_text"
+                android:layout_gravity="center" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="8dp">
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="0dp">
 
-                <RadioButton
-                    android:id="@+id/radioButton4"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="4"
-                    android:layout_marginEnd="8dp" />
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radioButton5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:layout_marginEnd="55dp"
-                    android:layout_marginStart="45dp" />
+                    <!-- Logement avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_logement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Logement"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
 
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6" />
+                    <!-- Nourriture avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_nourriture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nourriture"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
+
+                    <!-- Transport avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_transport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Transport"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
+
+                    <!-- Scolarité avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_scolarite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Scolarite"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
+
+                    <!-- Santé avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_sante"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sante"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
+
+                    <!-- Vêtements avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_vetements"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vetements"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
+
+                    <!-- Autres avec une icône -->
+                    <RadioButton
+                        android:id="@+id/radio_autres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Autres"
+                        android:textSize="16sp"
+                        android:drawableLeft="@drawable/ic_bus" /> <!-- Icône à gauche -->
+
+                </RadioGroup>
             </LinearLayout>
 
-            <!-- Troisième ligne -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="95dp">
-
-                <RadioButton
-                    android:id="@+id/radioButton7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7" />
-            </LinearLayout>
-
-        </RadioGroup>
-        <Button
-            android:id="@+id/button_send"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="valider"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_style_spending"
-            android:fontFamily="sans-serif-medium"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp"
-            android:layout_below="@id/radiogrp"
-            android:elevation="4dp" />
-
-    </RelativeLayout>
 
 
-</FrameLayout>
+            <!-- Validation Button -->
+            <Button
+                android:id="@+id/button_send"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:elevation="4dp"
+                android:background="@drawable/button_style_spending"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="2dp"
+                android:text="Valider"
+                android:layout_gravity="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

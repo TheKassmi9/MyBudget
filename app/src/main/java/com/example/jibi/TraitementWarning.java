@@ -9,6 +9,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,11 +24,19 @@ public class TraitementWarning extends AppCompatActivity {
      String warningValue;
      TextView resultTextView;
     TextView statusTextView;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+    //    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+//    private CollectionReference collectionReference=db.collection("Users");
+    private String currentUserId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traitement_warning);
-
+        firebaseAuth=FirebaseAuth.getInstance();
+        currentUser=firebaseAuth.getCurrentUser();
+        currentUserId=currentUser.getUid();
 
         // Récupérer le TextView où afficher la valeur
          resultTextView = findViewById(R.id.income);
@@ -39,9 +49,9 @@ public class TraitementWarning extends AppCompatActivity {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                 // Example user ID
-                String userId = "sas"; // Replace with the actual user ID
+//                String userId = "sas"; // Replace with the actual user ID
                 //  fetchIncomes( db,  userId, "income");
-                addField(db,userId,"warning",warningValue);
+                addField(db,currentUserId,"warning",warningValue);
                 // Afficher la valeur dans le TextView
             }catch(Exception e){
             resultTextView.setText("Operation Failed");  
@@ -52,7 +62,7 @@ public class TraitementWarning extends AppCompatActivity {
      // add a field to a user:
     private void addField(FirebaseFirestore db, String userId,String field, String value) {
     // Reference to the specific user's document
-    DocumentReference userRef = db.collection("users").document(userId);
+    DocumentReference userRef = db.collection("Users").document(userId);
 
     // Update the user's document with the new goal field
     userRef.update(field, value)
