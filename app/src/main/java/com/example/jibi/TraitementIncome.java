@@ -27,6 +27,7 @@ public class TraitementIncome extends AppCompatActivity {
     TextView resultTextView;
     TextView statusTextView;
     String incomeValue;
+
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
@@ -41,6 +42,7 @@ public class TraitementIncome extends AppCompatActivity {
          resultTextView = findViewById(R.id.income);
         statusTextView = findViewById(R.id.income_status);
         incomeValue= getIntent().getStringExtra("income_value");
+        String income_type= getIntent().getStringExtra("income_type");
         // Initialize Firestore
         firebaseAuth=FirebaseAuth.getInstance();
         currentUser=firebaseAuth.getCurrentUser();
@@ -54,7 +56,7 @@ public class TraitementIncome extends AppCompatActivity {
          
        // addField(db,userId,"goal","1000");
         // Add income to the user's income collection
-        addToCollection(db, currentUserId, Double.parseDouble(incomeValue), "Freelance Project", new Timestamp(new Date()),"income");
+        addToCollection(db, currentUserId, Double.parseDouble(incomeValue), income_type, new Timestamp(new Date()),"income");
         }catch(Exception e){
             statusTextView.setText("Operation Failed");  
         }

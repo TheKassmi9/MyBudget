@@ -86,7 +86,7 @@ public class TraitementTransactions extends AppCompatActivity {
         //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Example user ID
-        String userId = "sas"; // Replace with the actual user ID
+//        String userId = "sas"; // Replace with the actual user ID
         //fetchIncomes( db,  userId, "income");
        // addField(db,userId,"goal","1000");
         // Add income to the user's income collection

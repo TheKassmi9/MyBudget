@@ -54,10 +54,10 @@ public class TraitementSpending extends AppCompatActivity {
         // Récupérer la valeur envoyée par l'Intent
 
             incomeValue = getIntent().getStringExtra("spendingValue");
-            incomeValue = getIntent().getStringExtra("selectedValue");
+             String selectedValue  = getIntent().getStringExtra("selectedSpendingType");
        // addField(db,userId,"goal","1000");
         // Add income to the user's income collection
-        addToCollection(db, currentUserId,Double.parseDouble(incomeValue), "Freelance Project", new Timestamp(new Date()),"spend");
+       addToCollection(db, currentUserId,Double.parseDouble(incomeValue), selectedValue, new Timestamp(new Date()),"spend");
         }catch(Exception e){
             statusTextView.setText("Operation Failed");  
         }
