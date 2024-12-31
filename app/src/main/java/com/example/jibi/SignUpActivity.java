@@ -177,14 +177,14 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(!documentSnapshot.exists()){
-                    //Create the basic format of a User
-                    Map<String, Object> initialData= new HashMap<>();
-                    initialData.put("userName",username);
-                    initialData.put("email",email);
-                    initialData.put("budget",new Integer(0));
+//                    //Create the basic format of a User
+//                    Map<String, Object> initialData= new HashMap<>();
+//                    initialData.put("userName",username);
+//                    initialData.put("email",email);
+//                    initialData.put("budget",new Integer(0));
                     Income ic=new Income(new Timestamp(new Date()),"",0);
                     Spend sp= new Spend(new Timestamp(new Date()), "",0);
-                    UserAccount initData=new UserAccount(0,email,username);
+                    UserAccount initData=new UserAccount(0,email,username,0);
 
                     userdoc.collection("income").add(ic)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

@@ -49,7 +49,7 @@ public class TraitementGoal extends AppCompatActivity {
       //  fetchIncomes( db,  userId, "income");
         String goalValue = getIntent().getStringExtra("goal_value");
 
-        addField(db,currentUserId,"goal",goalValue);
+        addField(db,currentUserId,"goal",Double.parseDouble(goalValue));
 /*      
         // Récupérer le TextView où afficher la valeur
         TextView resultTextView = findViewById(R.id.TextResult);
@@ -62,7 +62,7 @@ public class TraitementGoal extends AppCompatActivity {
     }
 
      // add a field to a user:
-    private void addField(FirebaseFirestore db, String userId,String field, String value) {
+    private void addField(FirebaseFirestore db, String userId,String field, double value) {
     // Reference to the specific user's document
     DocumentReference userRef = db.collection("Users").document(userId);
 

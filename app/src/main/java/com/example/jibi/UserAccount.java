@@ -4,15 +4,17 @@ public class UserAccount {
     private double budget;
     private String email;
     private String userName;
+    private double goal;
 
 
     public UserAccount() {
     }
 
-    public UserAccount(double budget, String email, String userName) {
+    public UserAccount(double budget, String email, String userName, double goal) {
         this.budget = budget;
         this.email = email;
         this.userName = userName;
+        this.goal=goal;
 
     }
 
@@ -48,7 +50,14 @@ public class UserAccount {
         this.userName = userName;
     }
 
-//    public void setIncome(Income income) {
+    public double getGoal() {
+        return goal;
+    }
+
+    public void setGoal(double goal) {
+        this.goal = goal;
+    }
+    //    public void setIncome(Income income) {
 //        this.income = income;
 //    }
 //

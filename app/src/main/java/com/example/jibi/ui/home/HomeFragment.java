@@ -19,27 +19,28 @@ import androidx.fragment.app.Fragment;
 import com.example.jibi.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.DocumentSnapshot;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class HomeFragment extends Fragment {
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
     private double income = 0;
     private double spending = 0;
     private double remainingBudget ;
-    private double goal=4000; // Replace with your goal amount
+    private double goal; // Replace with your goal amount
     private double progress ;
 //    = (spending * 100) / (income - goal)
 
@@ -91,6 +92,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 remainingBudget= documentSnapshot.getDouble("budget");
+                goal=documentSnapshot.getDouble("goal");
                 actual_budget.setText("$"+remainingBudget);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -100,7 +102,7 @@ public class HomeFragment extends Fragment {
         });
         fetchcollection(db,currentUserId,"income");
         fetchcollection(db,currentUserId,"spend");
-
+        fetchDataAndPlot();
 
 
 
@@ -120,12 +122,12 @@ public class HomeFragment extends Fragment {
 //        }
 
         // Set up the line chart
-        LineDataSet lineDataSet = new LineDataSet(dataValues(), "Data Set");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
-        LineData data = new LineData(dataSets);
-        lineChart.setData(data);
-        lineChart.invalidate();
+//        LineDataSet lineDataSet = new LineDataSet(dataValues(), "Data Set");
+//        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+//        dataSets.add(lineDataSet);
+//        LineData data = new LineData(dataSets);
+//        lineChart.setData(data);
+//        lineChart.invalidate();
 
         // Set up the pie chart
         List<PieEntry> entries = new ArrayList<>();
@@ -152,15 +154,7 @@ public class HomeFragment extends Fragment {
         pieChart.invalidate();
     }
 
-    private List<Entry> dataValues() {
-        ArrayList<Entry> dataValue = new ArrayList<>();
-        dataValue.add(new Entry(0, 10));
-        dataValue.add(new Entry(1, 15));
-        dataValue.add(new Entry(2, 20));
-        dataValue.add(new Entry(3, 30));
-        dataValue.add(new Entry(4, 25));
-        return dataValue;
-    }
+
     private void fetchcollection(FirebaseFirestore db, String userId, String collection_name) {
         // Reference to the user's income collection
         CollectionReference incomeRef = db.collection("Users").document(userId).collection(collection_name);
@@ -178,6 +172,7 @@ public class HomeFragment extends Fragment {
                             double value =   document.getDouble("value");
                             if(collection_name.equals("income")){
                                 income+=value;
+
                             }
                             else{
                                 spending+=value;
@@ -206,5 +201,72 @@ public class HomeFragment extends Fragment {
         income=0;
         spending=0;
 
+    }
+    private void fetchDataAndPlot() {
+        CollectionReference incomeRef = db.collection("Users").document(currentUserId).collection("income");
+        CollectionReference spendingRef = db.collection("Users").document(currentUserId).collection("spend");
+
+        Tasks.whenAllSuccess(incomeRef.get(), spendingRef.get()).addOnSuccessListener(tasks -> {
+            QuerySnapshot incomeSnapshot = (QuerySnapshot) tasks.get(0);
+            QuerySnapshot spendingSnapshot = (QuerySnapshot) tasks.get(1);
+
+            Map<String, Double> incomeData = new TreeMap<>();
+            Map<String, Double> spendingData = new TreeMap<>();
+
+            for (DocumentSnapshot doc : incomeSnapshot) {
+                String date = doc.getString("date");
+                double value = doc.getDouble("value");
+                incomeData.put(date, value);
+            }
+
+            for (DocumentSnapshot doc : spendingSnapshot) {
+                String date = doc.getString("date");
+                double value = doc.getDouble("value");
+                spendingData.put(date, value);
+            }
+
+            List<Entry> incomeEntries = new ArrayList<>();
+            List<Entry> spendingEntries = new ArrayList<>();
+            List<String> labels = new ArrayList<>();
+            int index = 0;
+            for (String date : incomeData.keySet()) {
+                double incomeValue = incomeData.get(date);
+                double spendingValue = spendingData.getOrDefault(date, 0.0);
+                labels.add(date);
+
+                incomeEntries.add(new Entry(index, (float) incomeValue));
+                spendingEntries.add(new Entry(index, (float) spendingValue));
+                index++;
+            }
+
+            for (String date : spendingData.keySet()) {
+                if (!incomeData.containsKey(date)) {
+                    double spendingValue = spendingData.get(date);
+                    labels.add(date);
+
+                    incomeEntries.add(new Entry(index, 0f));
+                    spendingEntries.add(new Entry(index, (float) spendingValue));
+                    index++;
+                }
+            }
+
+            LineDataSet incomeDataSet = new LineDataSet(incomeEntries, "Income");
+            incomeDataSet.setColor(Color.GREEN);
+            incomeDataSet.setCircleColor(Color.GREEN);
+
+            LineDataSet spendingDataSet = new LineDataSet(spendingEntries, "Spending");
+            spendingDataSet.setColor(Color.RED);
+            spendingDataSet.setCircleColor(Color.RED);
+
+            LineData lineData = new LineData(incomeDataSet, spendingDataSet);
+            lineChart.setData(lineData);
+
+            XAxis xAxis = lineChart.getXAxis();
+            xAxis.setGranularity(1f);
+            xAxis.setValueFormatter((value, axis) -> labels.get((int) value));
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            lineChart.invalidate();
+        }).addOnFailureListener(e -> Toast.makeText(getActivity(), "Error fetching data.", Toast.LENGTH_SHORT).show());
     }
 }
