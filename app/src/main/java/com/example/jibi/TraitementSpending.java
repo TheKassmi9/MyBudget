@@ -65,11 +65,50 @@ public class TraitementSpending extends AppCompatActivity {
         
     }
 
+     // add a field to a user:
+    private void addField(FirebaseFirestore db, String userId,String field, double value) {
+    // Reference to the specific user's document
+    DocumentReference userRef = db.collection("Users").document(userId);
+
+    // Update the user's document with the new goal field
+    userRef.update(field, value)
+        .addOnSuccessListener(aVoid -> {
+            // Success - Goal added
+                Toast.makeText(TraitementSpending.this,"success",Toast.LENGTH_SHORT).show();
+
+
+        })
+        .addOnFailureListener(e -> {
+            // Failure - Error occurred
+                Toast.makeText(TraitementSpending.this,"error",Toast.LENGTH_SHORT).show();
+
+        });
+}
+
       private void addToCollection(FirebaseFirestore db, String userId, double value, String name, Timestamp date, String collection_name) {
         // Reference to the user's income collection
 
         CollectionReference incomeRef = db.collection("Users").document(userId).collection(collection_name);
+        // update the budget:
+        // Reference to the user's document
+    DocumentReference userRef = db.collection("Users").document(userId);
 
+// Retrieve the document
+    userRef.get().addOnCompleteListener(task -> {
+    if (task.isSuccessful()) {
+        DocumentSnapshot document = task.getResult();
+        if (document.exists()) {
+            // Retrieve the specific field, e.g., "name"
+            double budget = document.getDouble("budget");
+            addField(db,currentUserId,"budget",budget-value);
+            
+        } else {
+                Toast.makeText(TraitementSpending.this,"error",Toast.LENGTH_SHORT).show();
+        }
+    } else {
+                Toast.makeText(TraitementSpending.this,"error",Toast.LENGTH_SHORT).show();
+    }
+    });
         // Create an income object
         Map<String, Object> income = new HashMap<>();
         income.put("value", value);

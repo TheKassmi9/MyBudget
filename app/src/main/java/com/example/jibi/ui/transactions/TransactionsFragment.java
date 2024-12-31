@@ -215,8 +215,14 @@ public class TransactionsFragment extends Fragment {
                             Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
                             if(document.getDouble("value")==0)
                                 continue;
+                            try{
                             document.getReference().update("collectionType", collectionType);
-                            transactions.add(document);
+                            if(document!=null)
+                              transactions.add(document);
+                            }catch(Exception e){
+                            Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
                         }
                     }
                 }
@@ -238,7 +244,7 @@ public class TransactionsFragment extends Fragment {
 //                        Toast.makeText(getActivity(), ""+documentSnapshot.getDouble("value"), Toast.LENGTH_SHORT).show();
 ////                        transactions.add(documents);
 //                    }
-
+                    try{
                     Date date = documentSnapshot.getDate("date");
                     String name = documentSnapshot.getString("type");
 
@@ -249,6 +255,10 @@ public class TransactionsFragment extends Fragment {
                     String formattedDate = dateFormat.format(date);
 
                     addTransaction(name, String.valueOf(value), formattedDate, collectionType);
+                    }catch(Exception e){
+                    Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
                 }
             } else {
                 Toast.makeText(getActivity(), "Error fetching data.", Toast.LENGTH_SHORT).show();
