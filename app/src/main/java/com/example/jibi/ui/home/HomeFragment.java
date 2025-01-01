@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
                 remainingBudget= documentSnapshot.getDouble("budget");
                 goal=documentSnapshot.getDouble("goal");
                 String userName=documentSnapshot.getString("userName");
-                tv_welcome.setText("Welcome "+userName+"to JiBi App");
+                tv_welcome.setText("Welcome "+userName+" to JiBi App");
                 actual_budget.setText("$"+remainingBudget);
                 saving_progress.setText("Savings Progress (Goal: "+goal+"$)");
             }
