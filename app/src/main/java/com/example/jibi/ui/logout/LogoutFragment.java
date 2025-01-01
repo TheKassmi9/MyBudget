@@ -1,5 +1,7 @@
 package com.example.jibi.ui.logout;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -38,13 +40,17 @@ public class LogoutFragment extends Fragment {
         // je sais pas pourkoi il ya erreur dans les buttons ici je vais les commanter pour  demain
         Button btn_valider=view.findViewById(R.id.button_valider_logout);
         Button btn_annuler=view.findViewById(R.id.button_annuler_logout);
-        btn_annuler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i= new Intent(getActivity(), HomeFragment.class );
-                startActivity(i);
-            }
-        });
+//        btn_annuler.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Create an instance of HomeFragment
+//
+//            }
+//        });
+        // Bouton pour annuler et revenir au fragment Home
+        btn_annuler.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.nav_home);});
+
 
         firebaseAuth=FirebaseAuth.getInstance();
 
@@ -60,16 +66,16 @@ public class LogoutFragment extends Fragment {
             }
         });
 
-        btn_annuler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Naviguer vers le fragment Home
-//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_navigation_drawer);
-//                navController.navigate(R.id.nav_home); // ID du HomeFragment dans navigation.xml
-
-                Toast.makeText(getContext(), "Retour à Home", Toast.LENGTH_LONG).show();
-            }
-        });
+//        btn_annuler.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Naviguer vers le fragment Home
+////                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_navigation_drawer);
+////                navController.navigate(R.id.nav_home); // ID du HomeFragment dans navigation.xml
+//
+//                Toast.makeText(getContext(), "Retour à Home", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
 
         return view;
