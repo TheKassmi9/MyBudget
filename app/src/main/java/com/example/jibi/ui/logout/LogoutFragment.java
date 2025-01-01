@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.jibi.MainActivity;
 import com.example.jibi.R;
+import com.example.jibi.ui.home.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutFragment extends Fragment {
@@ -37,6 +38,14 @@ public class LogoutFragment extends Fragment {
         // je sais pas pourkoi il ya erreur dans les buttons ici je vais les commanter pour  demain
         Button btn_valider=view.findViewById(R.id.button_valider_logout);
         Button btn_annuler=view.findViewById(R.id.button_annuler_logout);
+        btn_annuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(getActivity(), HomeFragment.class );
+                startActivity(i);
+            }
+        });
+
         firebaseAuth=FirebaseAuth.getInstance();
 
         btn_valider.setOnClickListener(new View.OnClickListener() {

@@ -104,6 +104,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
                 else {
+                    etUsername.setError("Enter Username!");
+                    etEmail.setError("Enter Email ");
+                    etPassword.setError("Enter Password");
                     Toast.makeText(SignUpActivity.this, "Cannot Sign Up with empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
