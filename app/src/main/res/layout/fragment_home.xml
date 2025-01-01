@@ -18,7 +18,7 @@
             android:id="@+id/tv_welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to Budget Manager"
+            android:text=""
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/primary_text"
@@ -126,6 +126,7 @@
             android:elevation="6dp">
 
             <TextView
+                android:id="@+id/saving_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Savings Progress"
@@ -224,22 +225,22 @@
 
 
         <!-- Recent Transactions Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recent Transactions"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/primary_text"
-            android:layout_marginTop="28dp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Recent Transactions"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/primary_text"-->
+<!--            android:layout_marginTop="28dp" />-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recent_transactions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/card_background"
-            android:elevation="6dp"
-            android:padding="12dp" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_recent_transactions"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:background="@drawable/card_background"-->
+<!--            android:elevation="6dp"-->
+<!--            android:padding="12dp" />-->
     </LinearLayout>
 </ScrollView>
