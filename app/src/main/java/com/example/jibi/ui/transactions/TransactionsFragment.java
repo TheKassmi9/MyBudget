@@ -155,9 +155,9 @@ public class TransactionsFragment extends Fragment {
                 if (i == 0){
 
                     if(collectionType.equals("spend")) {
-                        newTextView.setText(">spent: " + " added at " + date);
+                        newTextView.setText(">spent: " + type+"  at " + date);
                     }else if(collectionType.equals("income")){
-                        newTextView.setText(">income: " + " added at " + date);
+                        newTextView.setText(">income: " + type+"  at " + date);
                     }
 
                 }
