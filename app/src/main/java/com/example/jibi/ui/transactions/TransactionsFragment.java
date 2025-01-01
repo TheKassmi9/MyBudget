@@ -51,9 +51,8 @@ public class TransactionsFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         // Initialize Firestore and fetch data
         firebaseAuth=FirebaseAuth.getInstance();
         currentUser=firebaseAuth.getCurrentUser();
@@ -62,33 +61,46 @@ public class TransactionsFragment extends Fragment {
 //        String userId = "sas"; // Replace with the actual user ID
         Toast.makeText(getActivity(), "Before calling fetch()", Toast.LENGTH_SHORT).show();
         fetchAndProcessTransactions(db, currentUserId);
-
-        /*
-        fetchcollection(db, userId, "income");
-        fetchcollection(db, userId, "spend");
-
-        for(DocumentSnapshot documentSnapshot:transactions){
-            Toast.makeText(this,"nnn",Toast.LENGTH_SHORT).show();
-               // Retrieve Date object from Firestore
-                Date date = documentSnapshot.getDate("date");
-
-                // Retrieve String for 'type'
-                String name = documentSnapshot.getString("type");
-
-                // Format the Date object to a String
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy", Locale.FRENCH);
-                String formattedDate = dateFormat.format(date);
-                    
-                // Retrieve the 'value' field and convert it to a String
-                int value = documentSnapshot.getLong("value").intValue(); // Assuming 'value' is stored as a number in Firestore
-                String valueAsString = String.valueOf(value);
-
-                // Call your method
-                addTransaction(name, valueAsString, formattedDate);
-
-        }*/
-
     }
+    //    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
+//        // Initialize Firestore and fetch data
+//        firebaseAuth=FirebaseAuth.getInstance();
+//        currentUser=firebaseAuth.getCurrentUser();
+//        currentUserId=currentUser.getUid();
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+////        String userId = "sas"; // Replace with the actual user ID
+//        Toast.makeText(getActivity(), "Before calling fetch()", Toast.LENGTH_SHORT).show();
+//        fetchAndProcessTransactions(db, currentUserId);
+//
+//        /*
+//        fetchcollection(db, userId, "income");
+//        fetchcollection(db, userId, "spend");
+//
+//        for(DocumentSnapshot documentSnapshot:transactions){
+//            Toast.makeText(this,"nnn",Toast.LENGTH_SHORT).show();
+//               // Retrieve Date object from Firestore
+//                Date date = documentSnapshot.getDate("date");
+//
+//                // Retrieve String for 'type'
+//                String name = documentSnapshot.getString("type");
+//
+//                // Format the Date object to a String
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy", Locale.FRENCH);
+//                String formattedDate = dateFormat.format(date);
+//
+//                // Retrieve the 'value' field and convert it to a String
+//                int value = documentSnapshot.getLong("value").intValue(); // Assuming 'value' is stored as a number in Firestore
+//                String valueAsString = String.valueOf(value);
+//
+//                // Call your method
+//                addTransaction(name, valueAsString, formattedDate);
+//
+//        }*/
+//
+//    }
 
     private void fetchcollection(FirebaseFirestore db, String userId, String collection_name) {
         // Reference to the user's income collection
@@ -103,9 +115,9 @@ public class TransactionsFragment extends Fragment {
 
                     // Process the income documents and add each transaction
                     for (DocumentSnapshot document : documents) {
-                        Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
                         if(document.getDouble("value")!=0){
-                            Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
                             transactions.add(document);
                         }
                         /*
@@ -209,10 +221,10 @@ public class TransactionsFragment extends Fragment {
                         String collectionType = collections[i];  // "income" or "spend"
 
                         // Add each document with a flag indicating its collection
-                        Toast.makeText(getActivity(), "After calling the function (before for loop)", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "After calling the function (before for loop)", Toast.LENGTH_SHORT).show();
                         for (DocumentSnapshot document : documents) {
                             // Add the document with the collection flag
-                            Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
                             if(document.getDouble("value")==0)
                                 continue;
                             try{
@@ -220,7 +232,7 @@ public class TransactionsFragment extends Fragment {
                             if(document!=null)
                               transactions.add(document);
                             }catch(Exception e){
-                            Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -256,7 +268,7 @@ public class TransactionsFragment extends Fragment {
 
                     addTransaction(name, String.valueOf(value), formattedDate, collectionType);
                     }catch(Exception e){
-                    Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
                 }
