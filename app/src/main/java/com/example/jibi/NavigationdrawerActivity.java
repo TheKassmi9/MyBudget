@@ -1,5 +1,9 @@
 package com.example.jibi;
 
+import static android.app.PendingIntent.getActivity;
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,6 +49,7 @@ public class NavigationdrawerActivity extends AppCompatActivity {
     private static final String KEY_PROFILE_IMAGE_URI = "profile_image_uri";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,7 @@ public class NavigationdrawerActivity extends AppCompatActivity {
         TextView userName=headerView.findViewById(R.id.user_name);
         TextView etEmail=headerView.findViewById(R.id.etEmail);
         ImageView profile_image= headerView.findViewById(R.id.profile_image);
+//        loadImageFromPreferences(profile_image);
 //        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 //        String savedImageUriString = prefs.getString(KEY_PROFILE_IMAGE_URI, "");
 

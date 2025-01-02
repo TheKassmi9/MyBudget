@@ -110,7 +110,7 @@ public class UserdataFragment extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String userName = documentSnapshot.getString("userName");
                 String email = documentSnapshot.getString("email");
-                about.setText("Welcome to your profile, " + userName + "! You are a key player in the Jibi project ecosystem. Here, you can track your tasks, set your goals, and monitor your progress. The more you use Jibi, the better you can manage your projects and team collaborations.");
+                about.setText("Welcome to your profile, " + userName + "! You are a key player in the Jibi project ecosystem. Here, you can track your tasks, set your goals, and monitor your progress. The more you use Jibi, the better you can manage your Budget perfectly and Save more money.");
                 username.setText(userName);
                 emailT.setText(email);
             }

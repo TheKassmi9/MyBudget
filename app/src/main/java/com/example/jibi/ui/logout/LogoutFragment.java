@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,9 +59,10 @@ public class LogoutFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Démarrer la nouvelle activité avec l'Intent
+                clearPreferencesOnLogout();
                 firebaseAuth.signOut();
                 Intent intent = new Intent(getContext(), MainActivity.class);
-                Toast.makeText(getContext(), "Logout succes,Login now", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "Logout succes,Login now", Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
             }
@@ -81,6 +83,20 @@ public class LogoutFragment extends Fragment {
         return view;
 
     }
+    // Define the shared preferences name
+    private static final String PREFS_NAME = "user_profile_prefs";
+
+    // Method to clear SharedPreferences
+    private void clearPreferencesOnLogout() {
+        // Access the shared preferences
+        SharedPreferences prefs = requireActivity().getSharedPreferences(PREFS_NAME, requireContext().MODE_PRIVATE);
+
+        // Edit the preferences and clear them
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear(); // Clears all data in SharedPreferences
+        editor.apply(); // Apply the changes asynchronously
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
