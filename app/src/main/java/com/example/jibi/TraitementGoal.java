@@ -71,7 +71,7 @@ public class TraitementGoal extends AppCompatActivity {
         .addOnSuccessListener(aVoid -> {
             // Success - Goal added
             TextView textView=findViewById(R.id.income);
-            String str="your Goal now is: "+value;
+            String str="your Goal now is: "+value+"$";
             textView.setText(str);
         })
         .addOnFailureListener(e -> {

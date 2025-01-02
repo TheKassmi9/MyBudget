@@ -198,7 +198,7 @@ public class SignUpActivity extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SignUpActivity.this, "Firestore Failed to initialize income collection", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(SignUpActivity.this, "Firestore Failed to initialize income collection", Toast.LENGTH_SHORT).show();
                                 }
                             });
                     userdoc.collection("spend").add(sp).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -209,13 +209,13 @@ public class SignUpActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(SignUpActivity.this, "Firestore Failed to initialize income collection", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SignUpActivity.this, "Firestore Failed to initialize income collection", Toast.LENGTH_SHORT).show();
                         }
                     });
                     userdoc.set(initData).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(SignUpActivity.this, "User journal document initialized", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SignUpActivity.this, "User journal document initialized", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

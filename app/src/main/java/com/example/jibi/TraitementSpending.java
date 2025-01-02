@@ -124,7 +124,7 @@ public class TraitementSpending extends AppCompatActivity {
                 // Success - Income added
             // Afficher la valeur dans le TextView
                 statusTextView.setText("Operation Completed");
-                resultTextView.setText("You Have spent around " + incomeValue);
+                resultTextView.setText("You Have spent around " + incomeValue+"$");
 
 
     
