@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
@@ -121,9 +123,10 @@ public class TraitementSpending extends AppCompatActivity {
             .addOnSuccessListener(documentReference -> {
                 // Success - Income added
             // Afficher la valeur dans le TextView
-                statusTextView.setText("Operation Completed");    
-                resultTextView.setText("INCOME THAT YOU ENTER IS " + incomeValue);  
-                  
+                statusTextView.setText("Operation Completed");
+                resultTextView.setText("You Have spent around " + incomeValue);
+
+
     
                       })
             .addOnFailureListener(e -> {

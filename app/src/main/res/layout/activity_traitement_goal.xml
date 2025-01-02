@@ -36,9 +36,10 @@
       <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="35sp"
+    android:textSize="30sp"
     android:text="this goal will override any previous goal"
     android:textColor="#fc2403"
+          android:gravity="center_horizontal"
     android:textStyle="bold"
       app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

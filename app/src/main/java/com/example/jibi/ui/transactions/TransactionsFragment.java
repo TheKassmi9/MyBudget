@@ -59,7 +59,7 @@ public class TransactionsFragment extends Fragment {
         currentUserId=currentUser.getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        String userId = "sas"; // Replace with the actual user ID
-        Toast.makeText(getActivity(), "Before calling fetch()", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Before calling fetch()", Toast.LENGTH_SHORT).show();
         fetchAndProcessTransactions(db, currentUserId);
     }
     //    @Override
@@ -108,94 +108,77 @@ public class TransactionsFragment extends Fragment {
 
         // Query the income collection
         incomeRef.get()
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    QuerySnapshot querySnapshot = task.getResult();
-                    List<DocumentSnapshot> documents = querySnapshot.getDocuments();
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        List<DocumentSnapshot> documents = querySnapshot.getDocuments();
 
-                    // Process the income documents and add each transaction
-                    for (DocumentSnapshot document : documents) {
+                        // Process the income documents and add each transaction
+                        for (DocumentSnapshot document : documents) {
 //                        Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
-                        if(document.getDouble("value")!=0){
+                            if(document.getDouble("value")!=0){
 //                            Toast.makeText(getActivity(), ""+document.getDouble("value"), Toast.LENGTH_SHORT).show();
-                            transactions.add(document);
-                        }
+                                transactions.add(document);
+                            }
                         /*
                         String value = document.getString("value");
                         String name = document.getString("type");
                         String date = document.getString("date");
                         addTransaction(name, value, date);*/
+                        }
+                    } else {
+                        // Handle the error
+                        Toast.makeText(getActivity(), "Error fetching incomes.", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    // Handle the error
-                    Toast.makeText(getActivity(), "Error fetching incomes.", Toast.LENGTH_SHORT).show();
-                }
-            });
+                });
     }
 
     private String previous = "#9ef542";
 
     private void addTransaction(String type, String value, String date, String collectionType) {
         String color = "#32a893"; // Default to green for income
-
         if (collectionType.equals("spend")) {
             color = "#FF0000"; // Red for spent
         }
 
-        // Find the original LinearLayout and the parent layout
-        LinearLayout originalLayout = getView().findViewById(R.id.original_view);
-        LinearLayout parentLayout = getView().findViewById(R.id.linear_layout);
+        LinearLayout transactionsContainer = getView().findViewById(R.id.transactions_container);
 
-        // Create a new LinearLayout to hold the copied views
-        LinearLayout newLayout = new LinearLayout(getActivity());
-        newLayout.setLayoutParams(new LinearLayout.LayoutParams(
+        LinearLayout transactionLayout = new LinearLayout(getActivity());
+        transactionLayout.setOrientation(LinearLayout.HORIZONTAL);
+        transactionLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
-        newLayout.setOrientation(LinearLayout.HORIZONTAL);
+        transactionLayout.setPadding(10, 10, 10, 10);
 
-        // Iterate through all children of the original layout
-        for (int i = 0; i < originalLayout.getChildCount(); i++) {
-            View child = originalLayout.getChildAt(i);
+        // Create TextView for transaction description
+        TextView descriptionTextView = new TextView(getActivity());
+        descriptionTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 2f));
+        descriptionTextView.setText(String.format(" %s: added at %s", type, date));
+        descriptionTextView.setTextColor(Color.parseColor("#42b9f5"));
+        descriptionTextView.setTextSize(16);
+        descriptionTextView.setPadding(10, 0, 0, 0);
 
-            // Create a copy of each child based on its type
-            if (child instanceof TextView) {
-                TextView originalTextView = (TextView) child;
-                TextView newTextView = new TextView(getActivity());
-
-                // Copy properties
-                newTextView.setLayoutParams(originalTextView.getLayoutParams());
-                if (i == 0){
-
-                    if(collectionType.equals("spend")) {
-                        newTextView.setText(">spent: " + type+"  at " + date);
-                    }else if(collectionType.equals("income")){
-                        newTextView.setText(">income: " + type+"  at " + date);
-                    }
-
-                }
-                else if (i == 1)
-                {
-                    Toast.makeText(getActivity(),collectionType, Toast.LENGTH_SHORT).show();
-
-                    if(collectionType.equals("spend")) {
-                        newTextView.setText("-" + value + "$");
-                    }else if(collectionType.equals("income")){
-                        newTextView.setText("+" + value + "$");
-                    }
+        // Create TextView for transaction value
+        TextView valueTextView = new TextView(getActivity());
+        valueTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        valueTextView.setText(String.format("%s%s$", collectionType.equals("spend") ? "-" : "+", value));
+        valueTextView.setTextColor(Color.parseColor(color));
+        valueTextView.setTextSize(16);
+        valueTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 
 
-                }
+        // Add TextViews to the transaction layout
+        transactionLayout.addView(descriptionTextView);
+        transactionLayout.addView(valueTextView);
 
-                newTextView.setTextSize(originalTextView.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
-                newTextView.setTextColor(Color.parseColor(color)); // Set the color based on collectionType
-
-                newLayout.addView(newTextView);
-            }
-        }
-
-        // Add the new layout with copied views to the parent layout
-        parentLayout.addView(newLayout);
+        // Add transaction layout to the container
+        transactionsContainer.addView(transactionLayout);
     }
+
 
 
 
@@ -228,9 +211,9 @@ public class TransactionsFragment extends Fragment {
                             if(document.getDouble("value")==0)
                                 continue;
                             try{
-                            document.getReference().update("collectionType", collectionType);
-                            if(document!=null)
-                              transactions.add(document);
+                                document.getReference().update("collectionType", collectionType);
+                                if(document!=null)
+                                    transactions.add(document);
                             }catch(Exception e){
 //                            Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -257,20 +240,20 @@ public class TransactionsFragment extends Fragment {
 ////                        transactions.add(documents);
 //                    }
                     try{
-                    Date date = documentSnapshot.getDate("date");
-                    String name = documentSnapshot.getString("type");
+                        Date date = documentSnapshot.getDate("date");
+                        String name = documentSnapshot.getString("type");
 
-                    double value = documentSnapshot.getDouble("value");
-                    String collectionType = documentSnapshot.getString("collectionType");  // "income" or "spend"
+                        double value = documentSnapshot.getDouble("value");
+                        String collectionType = documentSnapshot.getString("collectionType");  // "income" or "spend"
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy", Locale.FRENCH);
-                    String formattedDate = dateFormat.format(date);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy", Locale.FRENCH);
+                        String formattedDate = dateFormat.format(date);
 
-                    addTransaction(name, String.valueOf(value), formattedDate, collectionType);
+                        addTransaction(name, String.valueOf(value), formattedDate, collectionType);
                     }catch(Exception e){
 //                    Toast.makeText(getActivity(), "eee:  "+e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                            }
+                    }
                 }
             } else {
                 Toast.makeText(getActivity(), "Error fetching data.", Toast.LENGTH_SHORT).show();
